@@ -1,0 +1,72 @@
+﻿@page
+@model ClientDbWebApp.Pages.Clients.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Найти Клиента:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-page="./Index">Назад к списку</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].ClientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].ClientInn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].ClientType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].ClientCreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].ClientUpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Client) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientInn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientCreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientUpdatedDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

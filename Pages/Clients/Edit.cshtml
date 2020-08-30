@@ -1,0 +1,63 @@
+﻿@page "{id:int?}"
+@model ClientDbWebApp.Pages.Clients.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<h4>Client</h4>
+<hr />
+<div class="row d-flex justify-content-center ">
+    <div id="clientFormColumn" class="col bg-light border border-primary rounded m-1 p-3">
+        <form class="clientForm" method="post">
+            <p class="text-danger">@Model.ErrorMessage</p>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Client.ID" />
+            <div class="form-group">
+                <label asp-for="Client.ClientName" class="control-label"></label>
+                <input asp-for="Client.ClientName" class="clientName form-control" />
+                <span asp-validation-for="Client.ClientName" class="clientNameError text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.ClientInn" class="control-label"></label>
+                <input asp-for="Client.ClientInn" class="clientINN form-control" />
+                <span asp-validation-for="Client.ClientInn" class="clientInnError text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.ClientType" class="control-label"></label>
+                <select asp-for="Client.ClientType" class="clientTypeSelect form-control">
+                    <option>ИП</option>
+                    <option>ЮрЛицо</option>
+                </select>
+                <span asp-validation-for="Client.ClientType" class="clientTypeError text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Client.ClientCreatedDate" />
+                <input type="hidden" asp-for="JsonFounders" value="@Model.JsonFounders" class="clientFoundersList form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="saveClientButton btn btn-primary">Сохранить клиента</button>
+                <button type="button" class="addNewFounderButton btn btn-secondary">Добавить учредителя</button>
+            </div>
+        </form>
+
+        <div>
+            <a asp-page="./Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="foundersInfoBlock m-1 p-3">
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/page-content.js" asp-append-version="true"></script>
+    <script src="~/js/validation.js" asp-append-version="true"></script>
+    <script src="~/js/edit-page.js" asp-append-version="true"></script>
+    <script src="~/js/founder-form.js" asp-append-version="true"></script>
+    <script src="~/js/button-control.js" asp-append-version="true"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

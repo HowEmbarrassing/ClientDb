@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Product App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div>
+        <form class="clientForm">
+            <div class="form-group">
+                <label for="clientName">Наименование</label>
+                <input required='required' id='clientName' class="clientName" type="text" />
+                <span class="clientNameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="clientINN">ИНН Клиента</label>
+                <input id="clientINN" class="clientINN" type="tel" pattern="[0-9]*" required='required' minlength="10"
+                    maxlength="12" />
+                <span class="clientInnError"></span></div>
+
+            <div class="form-group">
+                <input class="clientFoundersList" name="clientFoundersList" type="hidden" />
+                <input class="clientCreatedDate" name="clientCreatedDate" type="hidden" />
+                <input class="clientUpdatedDate" name="clientUpdatedDate" type="hidden" />
+            </div>
+
+            <div class="form-group">
+                <label for="clientType">Тип Клиента</label>
+                <select id="clientType" class="clientTypeSelect">
+                    <option>ИП</option>
+                    <option>Юрлицо</option>
+                </select>
+                <span class="clientTypeError"></span>
+            </div>
+
+            <div class="form-group">
+                <!---Change saveClientButton type back to submit -->
+                <button type="button" class="saveClientButton">Сохранить клиента</button>
+                <button type="button" class="addNewFounderButton">Добавить учредителя</button>
+            </div>
+        </form>
+
+        <div class="foundersInfoBlock">
+    </div>
+    <script src="jquery.js"></script>
+    <script src="page-content.js"></script>
+    <script src="validation.js"></script>
+    <script src="founder-form.js"></script>
+    <script src="button-control.js"></script>
+    <script src="create-page.js"></script>
+</body>
+
+</html>
