@@ -1,7 +1,9 @@
 $( document ).ready(function() {
-const testJson = '[{"name":"Fred","inn":"231231233214","createdDate":"2020-08-29T21:23:28","updatedDate":"2020-08-29T21:23:28"},{"name":"Dredd","inn":"342143124312","createdDate":"2020-08-29T21:31:28","updatedDate":"2020-08-29T21:31:28"}]';
+//const testJson = '[{"name":"Fred","inn":"231231233214","createdDate":"2020-08-29T21:23:28","updatedDate":"2020-08-29T21:23:28"},{"name":"Dredd","inn":"342143124312","createdDate":"2020-08-29T21:31:28","updatedDate":"2020-08-29T21:31:28"}]';
+//let array = JSON.parse(testJson);
 
-let array = JSON.parse(testJson);
+const jsonString = clientFoundersListInput.value;
+let array = JSON.parse(jsonString);
 
 arrayToMap(array, founders);
 prepareFounderForms(founders);
