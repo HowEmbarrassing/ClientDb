@@ -1,17 +1,17 @@
 // CREATE NEW FOUNDER FORM
 function createFounderForm() {
     const founderForm = document.createElement('form');
-    founderForm.className = 'founderForm';
+    founderForm.className = 'founderForm row d-flex justify-content-center';
     founderForm.id = index;
 
+    const divFounderContainer = document.createElement('div');
+    divFounderContainer.className = 'col bg-light border border-primary rounded m-1 p-4'
+
     const divFounderName = document.createElement('div');
-    divFounderName.className = 'form-group';
     const divFounderINN = document.createElement('div');
-    divFounderINN.className = 'form-group';
     const divFounderButtons = document.createElement('div');
-    divFounderButtons.className = 'form-group';
+    divFounderButtons.className = 'buttonContainer';
     const divFounderDates = document.createElement('div');
-    divFounderDates.className = 'form-group';
 
     const labelFounderName = document.createElement('label');
     labelFounderName.textContent = 'ФИО учредителя';
@@ -76,15 +76,19 @@ function createFounderForm() {
     saveNewChangesButton.style.display = 'none';
     editNewFounderButton.disabled = true;
 
-  //  $( document ).ready(function() {
-       // $('.founderForm button').addClass('btn btn-white');
-        //$('.saveChangesButton').toggle();
-  //     $('.editFounderButton').attr('disabled', true);
-   // });
-
     divFounderButtons.append(saveNewFounderButton, saveNewChangesButton, editNewFounderButton, deleteNewFounderButton);
-    founderForm.append(divFounderName, divFounderINN, divFounderDates, divFounderButtons);
+    divFounderContainer.append(divFounderName, divFounderINN, divFounderDates, divFounderButtons);
+    founderForm.appendChild(divFounderContainer);
     foundersFormsBlock.appendChild(founderForm);
+
+    $(document).ready(function () {
+        $('label').addClass('control-label');
+        $('input').addClass('form-control');
+        $('span').addClass('text-danger');
+        $('button').addClass('btn btn-primary m-1 mt-4 p-2');
+        $('div > div').addClass('form-group');
+        $('div.buttonContainer').addClass('row justify-content-around m-1');
+    });
 
     index++;
     return founderForm;
@@ -92,9 +96,10 @@ function createFounderForm() {
 
 
 // Attach a delegated event handler for FOUNDER FORM BUTTON
-$( ".foundersInfoBlock" ).on( "click", "button.deleteFounderButton, button.saveFounderButton, button.saveChangesButton, button.editFounderButton", function( event ) {
+$(".foundersInfoBlock").on("click", "button.deleteFounderButton, button.saveFounderButton, button.saveChangesButton, button.editFounderButton", function (event) {
     event.preventDefault();
-    const form = $(this).parent().parent()[0];
+    const form = $(this).parent().parent().parent()[0];
+    console.log('event form.id: ' + form.id)
     const button = $(this)[0];
     const founderNameInput = form.querySelector('.founderFullName');
     const founderInnInput = form.querySelector('.founderINN');
@@ -158,6 +163,7 @@ function saveFounder(form, nameInput, innInput) {
     // create Founder using input data
     let founder = createFounder(nameInput, innInput);
     // add Founder to Founders Map 
+    console.log("form.id: " + form.id) //
     founders.set(form.id, founder);
 
     // send Founders Map to the input
@@ -171,7 +177,7 @@ function saveFounder(form, nameInput, innInput) {
 // Return newly created Founder
 function createFounder(nameInput, innInput) {
     let dateTimeNow = convertDate();
-    let founder = new Founder(nameInput.value, innInput.value, 
+    let founder = new Founder(nameInput.value, innInput.value,
         dateTimeNow, dateTimeNow);
     return founder;
 }
@@ -228,12 +234,12 @@ function saveChanges(form, nameInput, innInput) {
     // updates Founder in array Founders, using input data
     console.log('typeof form.id');
     console.log(typeof form.id);
- /*   console.log('form');
-    console.log(form);
-    console.log('founders.get(0)');
-    console.log(founders.get(0));
-    console.log('founders.get(Number(form.id))');
-    console.log(founders.get(Number(form.id)));*/
+    /*   console.log('form');
+       console.log(form);
+       console.log('founders.get(0)');
+       console.log(founders.get(0));
+       console.log('founders.get(Number(form.id))');
+       console.log(founders.get(Number(form.id)));*/
     console.log('founders.get(Number(form.id)).createdDate');
     console.log(founders.get(form.id).createdDate);
     let tempCreatedDate = founders.get(form.id).createdDate;
@@ -247,7 +253,7 @@ function saveChanges(form, nameInput, innInput) {
     //lockFounderInputs(true, founderFullNameInput, founderInnInput);
     //tempSaveFounderButton.disabled = true;
     //tempEditFounderButton.disabled = false;
-   // tempSaveChangesButton.disabled = true;
+    // tempSaveChangesButton.disabled = true;
     // log founders array
     console.log('UPDATE:');
     console.log(founders);
@@ -257,7 +263,7 @@ function saveChanges(form, nameInput, innInput) {
 // Return an updated Founder
 function updateFounder(nameInput, innInput, createdTime) {
     let dateTimeNow = convertDate();
-    let founder = new Founder(nameInput.value, innInput.value, 
+    let founder = new Founder(nameInput.value, innInput.value,
         createdTime, dateTimeNow);
     return founder;
 }

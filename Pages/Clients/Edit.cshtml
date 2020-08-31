@@ -2,13 +2,13 @@
 @model ClientDbWebApp.Pages.Clients.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактирование";
 }
 
-<h1>Edit</h1>
-<h4>Client</h4>
+<h1>Редактирование</h1>
+<h4>Клиент</h4>
 <hr />
-<div class="row d-flex justify-content-center ">
+<div class="row d-flex justify-content-center">
     <div id="clientFormColumn" class="col bg-light border border-primary rounded m-1 p-3">
         <form class="clientForm" method="post">
             <p class="text-danger">@Model.ErrorMessage</p>
@@ -36,21 +36,19 @@
                 <input type="hidden" asp-for="Client.ClientCreatedDate" />
                 <input type="hidden" asp-for="JsonFounders" value="@Model.JsonFounders" class="clientFoundersList form-control" />
             </div>
-            <div class="form-group">
-                <button type="submit" class="saveClientButton btn btn-primary">Сохранить клиента</button>
-                <button type="button" class="addNewFounderButton btn btn-secondary">Добавить учредителя</button>
+            <div class="form-group row justify-content-around">
+                <button type="submit" class="saveClientButton btn btn-primary">Сохранить Клиента</button>
+                <button type="button" class="addNewFounderButton btn btn-secondary">Добавить Учредителя</button>
             </div>
         </form>
 
         <div>
-            <a asp-page="./Index">Back to List</a>
+            <a asp-page="./Index">Назад к списку</a>
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-center">
-    <div class="foundersInfoBlock m-1 p-3">
-    </div>
+<div class="foundersInfoBlock d-flex justify-content-center row md-1 p-3">
 </div>
 
 @section Scripts {

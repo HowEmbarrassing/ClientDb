@@ -2,82 +2,69 @@
 @model ClientDbWebApp.Pages.Clients.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детали";
 }
 
-<h1>Details</h1>
+<h3>Детали</h3>
 
 <div>
-    <h4>Client</h4>
+    <h4>Клиент</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ClientName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ClientInn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientInn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ClientType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ClientCreatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientCreatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client.ClientUpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientUpdatedDate)
-        </dd>
-
-        @if (Model.Client.ClientType != "ИП")
-        {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Client.Founders)
-            </dt>
-            <dd class="col-sm-10">
-                <table class="table">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Client.ClientName)</th>
+                <th>@Html.DisplayNameFor(model => model.Client.ClientInn)</th>
+                <th>@Html.DisplayNameFor(model => model.Client.ClientType)</th>
+                <th>@Html.DisplayNameFor(model => model.Client.ClientCreatedDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Client.ClientUpdatedDate)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Client.ClientName)</td>
+                <td>@Html.DisplayFor(model => model.Client.ClientInn)</td>
+                <td>@Html.DisplayFor(model => model.Client.ClientType)</td>
+                <td>@Html.DisplayFor(model => model.Client.ClientCreatedDate)</td>
+                <td>@Html.DisplayFor(model => model.Client.ClientUpdatedDate)</td>
+            </tr>
+        </tbody>
+    </table>
+    @if (Model.Client.ClientType != "ИП")
+    {
+        <h5 class="col-sm-12">
+            @Html.DisplayNameFor(model => model.Client.Founders)
+        </h5>
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ФИО Учредителя</th>
+                    <th>ИНН Учредителя</th>
+                    <th>Создан</th>
+                    <th>Обновлен</th>
+                </tr>
+                @foreach (var item in Model.Client.Founders)
+                {
                     <tr>
-                        <th>ФИО Учредителя</th>
-                        <th>ИНН Учредителя</th>
-                        <th>Создан</th>
-                        <th>Обновлен</th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FounderFullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FounderInn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FounderCreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FounderUpdatedDate)
+                        </td>
                     </tr>
-                    @foreach (var item in Model.Client.Founders)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FounderFullName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FounderInn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FounderCreatedDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FounderUpdatedDate)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </dd>
-        }
-    </dl>
+                }
+            </table>
+        </div>
+    }
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Client.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Client.ID">Изменить</a> |
+    <a asp-page="./Index">Назад к списку</a>
 </div>
